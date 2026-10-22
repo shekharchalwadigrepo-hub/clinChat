@@ -5,3 +5,4 @@
 * Privacy-focused tools for dataset summarization, column description, counting, and grouped summaries.
 * Shiny integration via shinychat.
 * Basic unit tests with testthat.
+* Examples use `\donttest{}` where an API key is required (per CRAN guidance).

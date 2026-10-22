@@ -31,8 +31,11 @@ using a large language model. Uses shinychat for the interface and ellmer
 for the model backend.
 }
 \examples{
-\dontrun{
-data <- iris
+# Sample data
+data <- iris[1:20, ]
+
+# Launching the app requires a configured LLM provider
+\donttest{
 run_clinchat_app(data, title = "Iris Explorer")
 }
 }
