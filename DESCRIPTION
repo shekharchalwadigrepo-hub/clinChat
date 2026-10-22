@@ -1,0 +1,34 @@
+Package: clinChat
+Type: Package
+Title: Conversational Interfaces for Clinical Data with Large Language Models
+Version: 0.1.0
+Authors@R: person("Shekhar", "Chalwadi", email = "skrchalwadicg@gmail.com", role = c("aut", "cre"))
+Description: Provides tools and Shiny applications for interacting with clinical
+    datasets through natural language using large language models. Built on
+    'ellmer' and 'shinychat', it emphasizes privacy-aware workflows where
+    data remains local and only necessary summaries or tool results are
+    shared with the model. Includes ready-to-use chat interfaces for
+    exploratory analysis, summarization, and querying of clinical data.
+License: MIT + file LICENSE
+Encoding: UTF-8
+LazyData: true
+Depends: R (>= 4.1.0)
+Imports:
+    shiny (>= 1.8.0),
+    ellmer (>= 0.4.0),
+    shinychat (>= 0.4.0),
+    dplyr (>= 1.1.0),
+    cli,
+    rlang,
+    glue
+Suggests:
+    ragnar,
+    testthat (>= 3.0.0),
+    knitr,
+    rmarkdown,
+    bslib
+URL: https://github.com/shekharchalwadigrepo-hub/clinChat
+BugReports: https://github.com/shekharchalwadigrepo-hub/clinChat/issues
+VignetteBuilder: knitr
+RoxygenNote: 7.3.2
+NeedsCompilation: no

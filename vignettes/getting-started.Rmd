@@ -1,0 +1,52 @@
+---
+title: "Getting Started with clinChat"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{Getting Started with clinChat}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+```
+
+```{r setup}
+library(clinChat)
+```
+
+## Overview
+
+`clinChat` lets you explore clinical datasets through natural language while keeping the data local.
+
+## Example
+
+```{r, eval = FALSE}
+# Sample clinical data
+clinical_data <- data.frame(
+  subject_id = paste0("S", 1:30),
+  age = sample(25:75, 30, replace = TRUE),
+  sex = sample(c("Male", "Female"), 30, replace = TRUE),
+  treatment = sample(c("Drug A", "Placebo"), 30, replace = TRUE),
+  response = sample(c("Yes", "No"), 30, replace = TRUE, prob = c(0.6, 0.4))
+)
+
+# Create chat
+chat <- create_clinical_chat(clinical_data)
+
+# Ask questions (requires configured LLM provider)
+# chat$chat("What is the response rate by treatment arm?")
+```
+
+## Launching the App
+
+```{r, eval = FALSE}
+run_clinchat_app(clinical_data, title = "My Clinical Study")
+```
+
+## Privacy
+
+All data queries happen locally via tools. Only the results of those tools are passed to the language model.
