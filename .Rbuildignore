@@ -1,6 +1,8 @@
-^.*\.Rproj$
+^clinChat\.Rproj$
 ^\.Rproj\.user$
 ^LICENSE\.md$
 ^cran-comments\.md$
 ^\.github$
 ^README\.Rmd$
+^.*\.tar\.gz$
+^\.gitignore$

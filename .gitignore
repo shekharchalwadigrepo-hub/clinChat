@@ -2,3 +2,10 @@
 .Rhistory
 .RData
 .Ruserdata
+*.Rproj
+.DS_Store
+Thumbs.db
+*.tar.gz
+check/
+*.Rcheck/
+.github/

@@ -2,6 +2,7 @@ Package: clinChat
 Type: Package
 Title: Conversational Interfaces for Clinical Data with Large Language Models
 Version: 0.1.0
+Date: 2026-10-22
 Authors@R: person("Shekhar", "Chalwadi", email = "skrchalwadicg@gmail.com", role = c("aut", "cre"))
 Description: Provides tools and Shiny applications for interacting with clinical
     datasets through natural language using large language models. Built on
