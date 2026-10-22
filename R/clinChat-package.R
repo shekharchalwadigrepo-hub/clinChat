@@ -1,11 +1,13 @@
-#' @keywords internal
-"_PACKAGE"
-
 #' clinChat: Conversational Interfaces for Clinical Data
 #'
-#' Tools and Shiny applications for privacy-aware natural language interaction
-#' with clinical datasets using large language models.
+#' Provides tools and Shiny applications for interacting with clinical
+#' datasets through natural language using large language models. Built on
+#' ellmer and shinychat, it emphasizes privacy-aware workflows where data
+#' remains local and only necessary summaries or tool results are shared
+#' with the model.
 #'
-#' @name clinChat
 #' @docType package
-NULL
+#' @name clinChat-package
+#' @aliases clinChat
+#' @keywords internal
+"_PACKAGE"

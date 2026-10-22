@@ -35,7 +35,7 @@ for the model backend.
 data <- iris[1:20, ]
 
 # Launching the app requires a configured LLM provider
-\donttest{
-run_clinchat_app(data, title = "Iris Explorer")
+if (FALSE) {
+  run_clinchat_app(data, title = "Iris Explorer")
 }
 }

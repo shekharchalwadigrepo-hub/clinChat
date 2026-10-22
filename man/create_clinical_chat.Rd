@@ -24,7 +24,7 @@ a clinical dataset. Data remains local; only tool results are shared with
 the model.
 }
 \examples{
-# Create sample clinical data (this part is executable)
+# Create sample clinical data (executable)
 data <- data.frame(
   patient_id = 1:20,
   age = sample(25:80, 20, replace = TRUE),
@@ -32,9 +32,13 @@ data <- data.frame(
   outcome = sample(c("responder", "non-responder"), 20, replace = TRUE)
 )
 
-# Creating a chat and querying requires an API key / LLM provider
-\donttest{
-chat <- create_clinical_chat(data)
-# chat$chat("How many responders are there by sex?")
+# Inspect available tools (no API key required)
+tools <- clinical_tools(data)
+length(tools)
+
+# Creating a chat object requires a configured LLM provider
+if (FALSE) {
+  chat <- create_clinical_chat(data, provider = "openai/gpt-4o-mini")
+  # chat$chat("How many responders are there by sex?")
 }
 }
