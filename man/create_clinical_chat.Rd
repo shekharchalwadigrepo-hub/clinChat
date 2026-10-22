@@ -25,12 +25,21 @@ the model.
 }
 \examples{
 \dontrun{
+# Example 1: Simple clinical data
 data <- data.frame(
-  patient_id = 1:50,
-  age = sample(30:80, 50, replace = TRUE),
-  outcome = sample(c("responder", "non-responder"), 50, replace = TRUE)
+  patient_id = 1:30,
+  age = sample(25:80, 30, replace = TRUE),
+  sex = sample(c("M", "F"), 30, replace = TRUE),
+  outcome = sample(c("responder", "non-responder"), 30, replace = TRUE)
 )
 chat <- create_clinical_chat(data)
-chat$chat("Summarize the age distribution")
+chat$chat("How many responders are there by sex?")
+
+# Example 2: With a custom provider
+chat2 <- create_clinical_chat(
+  data,
+  provider = "openai/gpt-4o-mini",
+  system_prompt = "Be concise and use tools."
+)
 }
 }

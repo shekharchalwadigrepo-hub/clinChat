@@ -20,33 +20,70 @@ library(clinChat)
 
 ## Overview
 
-`clinChat` lets you explore clinical datasets through natural language while keeping the data local.
+`clinChat` lets you explore clinical datasets through natural language while keeping the data local. It registers tools that the language model can call to summarize, count, and group your data.
 
-## Example
+## Example 1: Basic Clinical Trial Data
 
 ```{r, eval = FALSE}
-# Sample clinical data
-clinical_data <- data.frame(
-  subject_id = paste0("S", 1:30),
-  age = sample(25:75, 30, replace = TRUE),
-  sex = sample(c("Male", "Female"), 30, replace = TRUE),
-  treatment = sample(c("Drug A", "Placebo"), 30, replace = TRUE),
-  response = sample(c("Yes", "No"), 30, replace = TRUE, prob = c(0.6, 0.4))
+# Simulated clinical trial data
+set.seed(42)
+trial_data <- data.frame(
+  subject_id = paste0("S", sprintf("%03d", 1:80)),
+  age = sample(18:85, 80, replace = TRUE),
+  sex = sample(c("Male", "Female"), 80, replace = TRUE),
+  arm = sample(c("Drug A", "Drug B", "Placebo"), 80, replace = TRUE),
+  response = sample(c("Responder", "Non-responder"), 80, replace = TRUE, prob = c(0.55, 0.45)),
+  baseline_score = round(rnorm(80, 50, 12), 1)
 )
 
-# Create chat
-chat <- create_clinical_chat(clinical_data)
+# Create a chat object
+chat <- create_clinical_chat(
+  data = trial_data,
+  system_prompt = "You are a clinical data analyst. Use the available tools to answer accurately."
+)
 
-# Ask questions (requires configured LLM provider)
-# chat$chat("What is the response rate by treatment arm?")
+# Example questions you can ask (requires API key)
+# chat$chat("How many subjects are in each treatment arm?")
+# chat$chat("What is the mean age by sex?")
+# chat$chat("Summarize the dataset")
 ```
 
-## Launching the App
+## Example 2: Lab Results Dataset
 
 ```{r, eval = FALSE}
-run_clinchat_app(clinical_data, title = "My Clinical Study")
+lab_data <- data.frame(
+  patient_id = 1:60,
+  age = sample(25:75, 60, replace = TRUE),
+  diagnosis = sample(c("Type 2 Diabetes", "Hypertension", "Healthy"), 60, replace = TRUE),
+  hba1c = round(rnorm(60, 6.8, 1.4), 1),
+  systolic_bp = round(rnorm(60, 132, 16))
+)
+
+chat2 <- create_clinical_chat(lab_data)
+
+# chat2$chat("How many patients have Type 2 Diabetes and what is their average HbA1c?")
+# chat2$chat("Describe the columns in this dataset")
+```
+
+## Launching the Interactive App
+
+```{r, eval = FALSE}
+# Launch a Shiny chat interface
+run_clinchat_app(
+  data = trial_data,
+  title = "Clinical Trial Explorer",
+  provider = "openai/gpt-4o-mini"   # or your preferred provider
+)
+```
+
+## Using the Tools Directly
+
+```{r, eval = FALSE}
+# Inspect the tools that will be registered
+tools <- clinical_tools(trial_data)
+length(tools)   # should be 4
 ```
 
 ## Privacy
 
-All data queries happen locally via tools. Only the results of those tools are passed to the language model.
+All data queries happen locally via tools. Only the results of those tools (summaries, counts, aggregates) are passed to the language model. Raw patient-level rows are never sent by default.

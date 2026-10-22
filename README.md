@@ -29,29 +29,35 @@ install.packages(c("shiny", "ellmer", "shinychat", "dplyr"))
 ```r
 library(clinChat)
 
-# Example clinical-style data
-data <- data.frame(
-  patient_id = 1:100,
-  age = sample(18:90, 100, replace = TRUE),
-  sex = sample(c("M", "F"), 100, replace = TRUE),
-  diagnosis = sample(c("Hypertension", "Diabetes", "Healthy"), 100, replace = TRUE),
-  systolic_bp = sample(110:180, 100, replace = TRUE)
+# Example 1: Clinical trial data
+set.seed(42)
+trial_data <- data.frame(
+  subject_id = paste0("S", 1:50),
+  age = sample(20:80, 50, replace = TRUE),
+  sex = sample(c("M", "F"), 50, replace = TRUE),
+  treatment = sample(c("Drug A", "Placebo"), 50, replace = TRUE),
+  response = sample(c("Yes", "No"), 50, replace = TRUE)
 )
 
-# Create a chat object with clinical tools registered
-chat <- create_clinical_chat(
-  data = data,
-  system_prompt = "You are a helpful clinical data analyst. Answer questions about the dataset accurately using the available tools. Never invent patient data."
+chat <- create_clinical_chat(trial_data)
+# chat$chat("What is the response rate by treatment?")
+
+# Example 2: Lab values
+lab_data <- data.frame(
+  patient_id = 1:40,
+  age = sample(30:70, 40, replace = TRUE),
+  diagnosis = sample(c("Diabetes", "Hypertension", "None"), 40, replace = TRUE),
+  hba1c = round(rnorm(40, 7.0, 1.2), 1)
 )
 
-# Chat (requires API key configured for your provider)
-chat$chat("How many patients have diabetes? What is their average age?")
+chat2 <- create_clinical_chat(lab_data)
+# chat2$chat("How many patients have diabetes? What is their mean HbA1c?")
 ```
 
 ## Launch a Shiny App
 
 ```r
-run_clinchat_app(data)
+run_clinchat_app(trial_data, title = "Trial Data Chat")
 ```
 
 ## Privacy Notes
